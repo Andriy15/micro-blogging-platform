@@ -1,6 +1,8 @@
-export const getError = (field: string, errors: any) => {
+import {Fields} from "./login/Login.constants";
+
+export const getError = (field: Fields, errors: any) => {
     switch (field) {
-      case 'email':
+      case Fields.email:
         if (errors.email?.type === 'required') {
           return 'This field is required'
         }
@@ -8,7 +10,7 @@ export const getError = (field: string, errors: any) => {
           return 'This field must be an email'
         }
         return ''
-      case 'password':
+      case Fields.password:
         if (errors.password?.type === 'required') {
           return 'This field is required'
         }
@@ -16,7 +18,7 @@ export const getError = (field: string, errors: any) => {
           return 'Min length is 8 symbols'
         }
         break
-      case 'confirmPassword':
+      case Fields.confirmPassword:
         if (errors.confirmPassword?.type === 'required') {
             return 'This field is required'
         }
