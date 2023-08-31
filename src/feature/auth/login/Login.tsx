@@ -4,7 +4,10 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../supabaseClient';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import { notify } from '../../../shared/notifyError';
+import { notifySuccess } from '../../../shared/notifySuccess';
+import { getError } from '../auth.module';
 
 
 interface LoginForm {
@@ -23,14 +26,9 @@ export function Login() {
         password: data.password,
         })
     if (error) {
-      toast.error(error.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: true,
-      })
+      notify(error.message)
     } else {
+        notifySuccess('Logged in successfully')
         navigate('/')
     }
 }
@@ -42,13 +40,13 @@ export function Login() {
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
-          {...register('email', { required: true })}
+          {...register('email', { required: true, pattern: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/ })}
           label="Email"
           fullWidth
           margin="normal"
           variant="outlined"
         />
-        {errors.email?.type === "required" && <span className='text-red-400'>This field is required</span>}
+        {errors.email && <span className='text-red-400'>{getError('email', errors)}</span>}
         <TextField
           {...register('password', { required: true, minLength: 8 })}
           type="password"
@@ -57,8 +55,7 @@ export function Login() {
           margin="normal"
           variant="outlined"
         />
-        {errors.password?.type === "required" && <span className='text-red-400'>This field is required</span>}
-        {errors.password?.type === 'minLength' && <span className='text-red-400'>Min length is 8 symbols</span>}
+        {errors.password && <span className='text-red-400'>{getError('password', errors)}</span>}
         <Button type="submit" variant="text" color="primary" fullWidth>
           Log In
         </Button>

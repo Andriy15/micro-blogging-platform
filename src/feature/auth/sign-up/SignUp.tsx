@@ -3,6 +3,10 @@ import { Button, Container, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { supabase } from "../../../supabaseClient";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { notify } from '../../../shared/notifyError'
+import { notifySuccess } from "../../../shared/notifySuccess";
+import { getError } from "../auth.module";
 
 interface SignUpForm {
   email: string;
@@ -23,9 +27,9 @@ export function SignUp() {
       })
   
       if (response.error) {
-        alert(response.error.message);
+        notify(response.error.message)
       } else {
-        alert("Sign up successful!")
+        notifySuccess('Check your email for confirmation')
       }
       navigate('/')
 
@@ -44,15 +48,13 @@ export function SignUp() {
         <TextField
           id="email"
           type="email"
-          {...register("email", { required: true })}
+          {...register("email", { required: true, pattern: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/ })}
           variant="outlined"
           margin="normal"
           label="Email"
           className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
         />
-        {errors.email && (
-          <span className="text-red-600">This field is required</span>
-        )}
+        {errors.email && (<span className="text-red-600">{getError('email', errors)}</span>)}
         <TextField
           id="password"
           type="password"
@@ -62,12 +64,7 @@ export function SignUp() {
           label="Password"
           className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
         />
-        {errors.password?.type === "required" && (
-          <span className="text-red-600">This field is required</span>
-        )}
-        {errors.password?.type === "minLength" && (
-          <span className="text-red-600">Min length is 8 symbols</span>
-        )}
+        {errors.password && (<span className="text-red-600">{getError('password', errors)}</span>)}
         <TextField
           id="confirmPassword"
           type="password"
@@ -81,12 +78,15 @@ export function SignUp() {
           className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-500"
         />
         {errors.confirmPassword && (
-          <span className="text-red-600">{errors.confirmPassword.message}</span>
+          <span className="text-red-600">{getError('confirmPassword', errors)}</span>
         )}
         <Button type="submit" variant="text" color="primary" fullWidth>
           Sign Up
         </Button>
       </form>
+
+      <ToastContainer />
+
     </Container>
-  );
+  )
 }
