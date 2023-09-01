@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useUser } from '../feature/auth/hooks/user.hook'
 import { Blog } from '../feature/blog/Blog'
-import { useBlogs } from '../feature/service/blogs.service'
+import { useBlogs } from '../feature/blog/service/blogs.service'
 import { Loader } from '../shared/Loader'
 import { notify } from '../shared/notifyError'
 import { Error } from '../shared/error/Error'
@@ -11,6 +11,11 @@ import { toast, ToastContainer } from 'react-toastify'
 export function Home() {
 	const { user } = useUser()
 	const { blogs, loading, error } = useBlogs()
+	const [dropdownOpen, setDropdownOpen] = useState(false)
+
+	const onDropdownOpen = () => {
+		setDropdownOpen(true)
+	}
 
 	return (
 		<>
@@ -30,13 +35,17 @@ export function Home() {
 						})}
 
 					{blogs.map(blog => (
-						<Blog key={blog.title} blog={blog} />
+						<Blog
+							key={blog.title}
+							blog={blog}
+							onDropdownOpen={onDropdownOpen}
+						/>
 					))}
 
 					<ToastContainer />
 				</div>
 			) : (
-				<div className='flex flex-col items-center'>
+				<div className='flex flex-col items-center mt-4'>
 					<h1 className='text-3xl font-bold mb-4'>
 						Welcome to Our Micro-Blogging Platform
 					</h1>

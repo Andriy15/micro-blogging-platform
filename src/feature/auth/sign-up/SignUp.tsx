@@ -1,5 +1,15 @@
 import React from 'react'
-import { Button, Container, TextField, Typography } from '@mui/material'
+import {
+	Button,
+	Container,
+	FormControl,
+	FormControlLabel,
+	FormLabel,
+	Radio,
+	RadioGroup,
+	TextField,
+	Typography
+} from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { supabase } from '../../../supabaseClient'
 import { useNavigate } from 'react-router-dom'
@@ -8,6 +18,7 @@ import { notify } from '../../../shared/notifyError'
 import { notifySuccess } from '../../../shared/notifySuccess'
 import { getError } from '../auth.module'
 import { Fields } from '../login/Login.constants'
+import { useRole } from './context/Role.context'
 
 interface SignUpForm {
 	email: string
@@ -24,6 +35,10 @@ export function SignUp() {
 	} = useForm<SignUpForm>()
 
 	const navigate = useNavigate()
+
+	const { role, setRole } = useRole()
+
+	console.log(role)
 
 	const onSubmit = async (data: SignUpForm): Promise<void> => {
 		try {
@@ -96,6 +111,30 @@ export function SignUp() {
 						{getError(Fields.confirmPassword, errors)}
 					</span>
 				)}
+				<FormControl>
+					<FormLabel id='demo-row-radio-buttons-group-label'>
+						Choose your role
+					</FormLabel>
+					<RadioGroup
+						row
+						aria-labelledby='demo-row-radio-buttons-group-label'
+						name='row-radio-buttons-group'
+					>
+						<FormControlLabel
+							value='commentator'
+							control={<Radio />}
+							label='Commentator'
+							onChange={() => setRole('commentator')}
+						/>
+						<FormControlLabel
+							value='author'
+							control={<Radio />}
+							label='Author'
+							onChange={() => setRole('author')}
+						/>
+					</RadioGroup>
+				</FormControl>
+
 				<Button type='submit' variant='text' color='primary' fullWidth>
 					Sign Up
 				</Button>

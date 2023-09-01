@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useUser } from '../auth/hooks/user.hook'
 import { supabase } from '../../supabaseClient'
 import { notify } from '../../shared/notifyError'
+import { useRole } from '../auth/sign-up/context/Role.context'
 
 interface NavLayoutProps {
 	children: React.ReactNode
@@ -21,9 +22,9 @@ export function NavLayout({ children }: NavLayoutProps) {
 		<>
 			<nav className='flex items-center justify-between flex-wrap bg-gray-800 p-6'>
 				<div className='flex items-center flex-shrink-0 text-white mr-6'>
-					<span className='font-semibold text-xl tracking-tight'>
+					<Link to='/' className='font-semibold text-xl tracking-tight'>
 						Micro-Blogging Platform
-					</span>
+					</Link>
 				</div>
 				<div className='w-full block flex-grow lg:flex lg:items-center lg:w-auto'>
 					<div className='text-sm lg:flex-grow'>
@@ -42,6 +43,10 @@ export function NavLayout({ children }: NavLayoutProps) {
 								>
 									Logout
 								</Link>
+
+								<div className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'>
+									{user.email}
+								</div>
 							</>
 						) : (
 							<>
@@ -66,5 +71,3 @@ export function NavLayout({ children }: NavLayoutProps) {
 		</>
 	)
 }
-
-// b63b6269a1d8451091748df7e17a9e31
