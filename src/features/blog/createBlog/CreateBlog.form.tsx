@@ -22,7 +22,7 @@ export function CreateBlog() {
 		try {
 			const { data, error } = await supabase
 				.from('blogs')
-				.insert({ title: title, content: content, email: user?.email, published_at: new Date().toLocaleDateString(), description: description, urlimage: urlImage, url: url })
+				.insert({ title: title, content: content, email: user?.email, published_at: new Date(), description: description, urlimage: urlImage, url: url })
 				.single()
 			if (error) {
 				notify(error.message)

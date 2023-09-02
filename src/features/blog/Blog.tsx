@@ -3,6 +3,7 @@ import { IBlog } from './Blog.model'
 import { CommentForm } from '../../entities/comments/Comment.form'
 import { CommentList } from '../../entities/comments/Comment.list'
 import { DateTime } from 'luxon'
+import { useRole } from '../auth/sign-up/context/Role.context'
 
 interface BlogProps {
 	blog: IBlog
@@ -11,6 +12,8 @@ interface BlogProps {
 
 export function Blog({ blog, onDropdownOpen }: BlogProps) {
 	const [dropdownOpen, setDropdownOpen] = useState(false)
+
+	const { role } = useRole()
 
 	const toggleDropdown = () => {
 		setDropdownOpen(!dropdownOpen)
@@ -45,7 +48,7 @@ export function Blog({ blog, onDropdownOpen }: BlogProps) {
 			{dropdownOpen && (
 				<div>
 					<CommentList id={blog.id} />
-					<CommentForm id={blog.id} />
+					{role === 'commentator' && <CommentForm id={blog.id} />}
 				</div>
 			)}
 		</div>

@@ -12,10 +12,11 @@ export const RoleContext = createContext<IRoleContext>({
 })
 
 export const RoleState: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const [role, setRole] = useState('')
+	const [role, setRole] = useState(localStorage.getItem('role') || '')
 
 	const setRoleState = (newRole: string) => {
 		setRole(newRole)
+		localStorage.setItem('role', newRole)
 	}
 
 	return (

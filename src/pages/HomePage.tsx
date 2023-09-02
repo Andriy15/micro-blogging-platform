@@ -3,20 +3,24 @@ import { Link } from 'react-router-dom'
 import { useUser } from '../entities/user/user.hook'
 import { Button } from '../features/blog/createBlog/ui/Button'
 import { BlogList } from '../features/blog/Blog.list'
+import { useRole } from '../features/auth/sign-up/context/Role.context'
 
 export function HomePage() {
 	const { user } = useUser()
+
+	const { role } = useRole()
 
 	return (
 		<>
 			{user ? (
 				<div className='container mx-auto flex flex-col items-center max-w-2xl pt-5'>
-
 					<BlogList />
 
-					<div className='fixed bottom-10 right-10'>
-						<Button>Create new Blog</Button>
-					</div>
+					{role === 'author' && (
+						<div className='fixed bottom-10 right-10'>
+							<Button>Create new Blog</Button>
+						</div>
+					)}
 				</div>
 			) : (
 				<div className='flex flex-col items-center mt-4'>

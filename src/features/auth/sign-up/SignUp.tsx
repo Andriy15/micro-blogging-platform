@@ -16,8 +16,8 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { notify } from '../../../shared/notifyError'
 import { notifySuccess } from '../../../shared/notifySuccess'
-import { getError } from '../auth.model'
-import { Fields } from '../auth.constants'
+import { getError } from '../model/model'
+import { Fields } from '../model/constants'
 import { useRole } from './context/Role.context'
 
 interface SignUpForm {

@@ -1,4 +1,4 @@
-import {Fields} from "./auth.constants";
+import {Fields} from "./constants";
 
 export const getError = (field: Fields, errors: any) => {
     switch (field) {

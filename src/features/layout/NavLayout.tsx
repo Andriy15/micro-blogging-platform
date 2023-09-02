@@ -32,12 +32,10 @@ export function NavLayout({ children }: NavLayoutProps) {
 					<div className='text-sm lg:flex-grow'>
 						{user ? (
 							<>
-								<Link
-									to='/'
-									className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'
-								>
-									Home
-								</Link>
+								<div className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'>
+									{user.email}
+								</div>
+
 								<Link
 									to='/'
 									className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'
@@ -46,20 +44,12 @@ export function NavLayout({ children }: NavLayoutProps) {
 									Logout
 								</Link>
 
-								<div className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'>
-									{user.email}
-								</div>
-
 								{role === 'commentator' && (
-									<span className='block mt-4 lg:inline-block lg:mt-0 ml-4'>
-										Commentator
-									</span>
+									<span className='text-white'>Commentator</span>
 								)}
 
 								{role === 'author' && (
-									<span className='block mt-4 lg:inline-block lg:mt-0 ml-4'>
-										Author
-									</span>
+									<span className='text-white'>Author</span>
 								)}
 							</>
 						) : (
