@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useUser } from '../entities/user/user.hook'
-import { Blog } from '../entities/blog/Blog'
-import { useBlogs } from '../entities/blog/hook/Blogs.hook'
+import { Blog } from '../features/blog/Blog'
 import { Loader } from '../shared/Loader'
 import { Error } from '../shared/error/Error'
 import { toast, ToastContainer } from 'react-toastify'
+import { Button } from '../features/blog/createBlog/ui/Button'
+import { useBlogs } from '../features/blog/createBlog/hooks/getBlogs'
 
 export function HomePage() {
 	const { user } = useUser()
@@ -39,8 +40,12 @@ export function HomePage() {
 							blog={blog}
 							onDropdownOpen={onDropdownOpen}
 						/>
-					))}
+					)
+					)}
 
+					<div className='fixed bottom-10 right-10'>
+						<Button>Create new Blog</Button>
+					</div>
 					<ToastContainer />
 				</div>
 			) : (

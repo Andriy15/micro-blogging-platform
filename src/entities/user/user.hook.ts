@@ -18,7 +18,7 @@ export const useUser = () => {
 
 	useEffect(() => {
 		getUser()
-	}, [user])
+	}, [])
 
 	useEffect(() => {
 		const { data: authListener } = supabase.auth.onAuthStateChange(

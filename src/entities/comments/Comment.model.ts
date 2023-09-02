@@ -1,5 +1,6 @@
 export interface IComment {
 	id: number
+	blog_id: number
 	text: string
-	author: string
+	email: string
 }

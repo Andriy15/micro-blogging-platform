@@ -1,39 +1,36 @@
 import React, { useState } from 'react'
-import { supabase } from '../config/supabaseClient'
+import { supabase } from '../../features/config/supabaseClient'
 import { useForm } from 'react-hook-form'
+import { notify } from '../../shared/notifyError'
+import { IBlog } from '../../features/blog/Blog.model'
+import { useUser } from '../user/user.hook'
 
 interface CommentForm {
-	author: string
-	text: string
+	id: IBlog['id']
 }
 
-export function CommentForm() {
+export function CommentForm({ id }: CommentForm) {
 	const [comment, setComment] = useState('')
-	const [author, setAuthor] = useState('')
 	const {
 		handleSubmit,
 		register,
 		formState: { errors }
 	} = useForm()
 
-	const generateNumberId = () => {
-		return Math.floor(Math.random() * 1000000)
-	}
+	const { user } = useUser()
+
 
 	const onSubmit = async () => {
 		try {
 			const { data, error } = await supabase
 				.from('comments')
-				.insert({id: generateNumberId(), text: comment, author: author })
+				.insert({ text: comment, email: user?.email, blog_id: id })
 				.single()
 
-			if (error) {
-				throw error
-			}
+			error && notify(error.message)
 
 			window.location.reload()
 
-			setAuthor('')
 			setComment('')
 		} catch (error) {
 			console.error('Error submitting comment:', error)
@@ -46,16 +43,6 @@ export function CommentForm() {
 				<label htmlFor='comment' className='text-gray-700 font-medium mb-1'>
 					Comment
 				</label>
-				<input
-					type='text'
-					className='border border-gray-300 rounded-lg p-2 mb-2'
-					placeholder='Author'
-					{...register('author', { required: true })}
-					onChange={e => setAuthor(e.target.value)}
-				/>
-				{errors.author && (
-					<span className='text-red-400'>Please enter an author</span>
-				)}
 				<textarea
 					className='border border-gray-300 rounded-lg p-2 mb-2'
 					placeholder='Comment'
