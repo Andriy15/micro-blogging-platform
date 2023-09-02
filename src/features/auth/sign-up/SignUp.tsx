@@ -11,7 +11,7 @@ import {
 	Typography
 } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { supabase } from '../../../supabaseClient'
+import { supabase } from '../../config/supabaseClient'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { notify } from '../../../shared/notifyError'

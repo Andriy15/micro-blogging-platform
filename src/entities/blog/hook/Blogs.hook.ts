@@ -6,7 +6,7 @@ export function useBlogs() {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
 
-	async function getBlogs() {
+	async function getBlogs(): Promise<void> {
 		try {
 			setError('')
 			setLoading(true)

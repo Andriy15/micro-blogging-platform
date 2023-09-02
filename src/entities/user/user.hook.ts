@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { supabase } from '../../../supabaseClient'
+import { supabase } from '../../features/config/supabaseClient'
 import { User } from '@supabase/supabase-js'
-import { notify } from '../../../shared/notifyError'
+import { notify } from '../../shared/notifyError'
 
 export const useUser = () => {
 	const [user, setUser] = useState<User | null>(null)
 
-	async function getUser() {
+	async function getUser(): Promise<void> {
 		try {
 			const { data } = await supabase.auth.getUser()
 			setUser(data.user || null)

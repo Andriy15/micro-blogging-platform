@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useUser } from '../feature/auth/hooks/user.hook'
-import { Blog } from '../feature/blog/Blog'
-import { useBlogs } from '../feature/blog/hook/Blogs.hook'
+import { useUser } from '../entities/user/user.hook'
+import { Blog } from '../entities/blog/Blog'
+import { useBlogs } from '../entities/blog/hook/Blogs.hook'
 import { Loader } from '../shared/Loader'
-import { notify } from '../shared/notifyError'
 import { Error } from '../shared/error/Error'
 import { toast, ToastContainer } from 'react-toastify'
 
-export function Home() {
+export function HomePage() {
 	const { user } = useUser()
 	const { blogs, loading, error } = useBlogs()
 	const [dropdownOpen, setDropdownOpen] = useState(false)

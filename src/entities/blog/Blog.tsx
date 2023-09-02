@@ -1,9 +1,9 @@
 import React, { useId, useState } from 'react'
 import { IBlog } from './Blog.model'
-import { CommentForm } from '../comments/Comment.form'
-import { CommentList } from '../comments/Comment.list'
-import { useComment } from '../comments/hooks/Comments.hook'
-import { useRole } from '../auth/sign-up/context/Role.context'
+import { CommentForm } from '../../features/comments/Comment.form'
+import { CommentList } from '../../features/comments/Comment.list'
+import { useComment } from '../../features/comments/hooks/Comments.hook'
+import { useRole } from '../../features/auth/sign-up/context/Role.context'
 
 interface BlogProps {
 	blog: IBlog

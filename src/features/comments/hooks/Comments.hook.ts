@@ -1,6 +1,6 @@
 import { IComment } from '../Comment.model'
 import { useEffect, useState } from 'react'
-import { supabase } from '../../../supabaseClient'
+import { supabase } from '../../config/supabaseClient'
 
 export function useComment() {
 	const [comments, setComments] = useState<IComment[]>([])

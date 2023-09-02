@@ -1,4 +1,4 @@
-export function EmailConfirm() {
+export function EmailConfirmPage() {
 	return (
 		<div className='bg-white rounded-lg shadow-md p-4 my-4'>
 			<h2 className='text-xl font-semibold mb-2'>Email confirmation</h2>

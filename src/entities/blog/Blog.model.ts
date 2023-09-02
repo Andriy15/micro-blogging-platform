@@ -1,4 +1,4 @@
-import { IComment } from '../comments/Comment.model'
+import { IComment } from '../../features/comments/Comment.model'
 
 export interface IBlog {
 	source: {
