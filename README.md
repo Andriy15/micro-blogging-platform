@@ -1,1 +1,1 @@
-# React App
+# Micro-blogging platform
