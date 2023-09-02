@@ -1,52 +1,22 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useUser } from '../entities/user/user.hook'
-import { Blog } from '../features/blog/Blog'
-import { Loader } from '../shared/Loader'
-import { Error } from '../shared/error/Error'
-import { toast, ToastContainer } from 'react-toastify'
 import { Button } from '../features/blog/createBlog/ui/Button'
-import { useBlogs } from '../features/blog/createBlog/hooks/getBlogs'
+import { BlogList } from '../features/blog/Blog.list'
 
 export function HomePage() {
 	const { user } = useUser()
-	const { blogs, loading, error } = useBlogs()
-	const [dropdownOpen, setDropdownOpen] = useState(false)
-
-	const onDropdownOpen = () => {
-		setDropdownOpen(true)
-	}
 
 	return (
 		<>
 			{user ? (
 				<div className='container mx-auto flex flex-col items-center max-w-2xl pt-5'>
-					{loading && <Loader />}
 
-					{error &&
-						toast.error(<Error error={error} />, {
-							position: 'top-right',
-							autoClose: 7000,
-							hideProgressBar: false,
-							closeOnClick: true,
-							pauseOnHover: true,
-							draggable: true,
-							progress: undefined
-						})}
-
-					{blogs.map(blog => (
-						<Blog
-							key={blog.title}
-							blog={blog}
-							onDropdownOpen={onDropdownOpen}
-						/>
-					)
-					)}
+					<BlogList />
 
 					<div className='fixed bottom-10 right-10'>
 						<Button>Create new Blog</Button>
 					</div>
-					<ToastContainer />
 				</div>
 			) : (
 				<div className='flex flex-col items-center mt-4'>
