@@ -1,3 +1,4 @@
+import React from 'react'
 import { createContext, useContext, useState } from 'react'
 
 interface IRoleContext {
@@ -10,9 +11,7 @@ export const RoleContext = createContext<IRoleContext>({
 	setRole: () => {}
 })
 
-export const RoleState: React.FC<{ children: React.ReactNode }> = ({
-	children
-}) => {
+export const RoleState: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [role, setRole] = useState('')
 
 	const setRoleState = (newRole: string) => {

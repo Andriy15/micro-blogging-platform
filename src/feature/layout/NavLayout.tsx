@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { useUser } from '../auth/hooks/user.hook'
 import { supabase } from '../../supabaseClient'
@@ -10,6 +11,7 @@ interface NavLayoutProps {
 
 export function NavLayout({ children }: NavLayoutProps) {
 	const { user } = useUser()
+	const { role } = useRole()
 
 	const handleLogout = async () => {
 		const { error } = await supabase.auth.signOut()
@@ -47,6 +49,18 @@ export function NavLayout({ children }: NavLayoutProps) {
 								<div className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'>
 									{user.email}
 								</div>
+
+								{role === 'commentator' && (
+									<span className='block mt-4 lg:inline-block lg:mt-0 ml-4'>
+										Commentator
+									</span>
+								)}
+
+								{role === 'author' && (
+									<span className='block mt-4 lg:inline-block lg:mt-0 ml-4'>
+										Author
+									</span>
+								)}
 							</>
 						) : (
 							<>

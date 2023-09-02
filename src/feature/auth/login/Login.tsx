@@ -6,9 +6,9 @@ import { supabase } from '../../../supabaseClient'
 import { ToastContainer } from 'react-toastify'
 import { notify } from '../../../shared/notifyError'
 import { notifySuccess } from '../../../shared/notifySuccess'
-import { getError } from '../auth.module'
+import { getError } from '../auth.model'
 import { REGEX_PATTRERNS } from '../auth.constants'
-import { Fields, FORM_LABELS } from './Login.constants'
+import { Fields, FORM_LABELS } from '../auth.constants'
 
 interface LoginForm {
 	email: string

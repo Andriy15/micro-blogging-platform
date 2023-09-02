@@ -2,7 +2,7 @@ import React, { useId, useState } from 'react'
 import { IBlog } from './Blog.model'
 import { CommentForm } from '../comments/Comment.form'
 import { CommentList } from '../comments/Comment.list'
-import { useComment } from '../comments/hooks/comments.hook'
+import { useComment } from '../comments/hooks/Comments.hook'
 import { useRole } from '../auth/sign-up/context/Role.context'
 
 interface BlogProps {
@@ -21,8 +21,6 @@ export function Blog({ blog, onDropdownOpen }: BlogProps) {
 		setDropdownOpen(!dropdownOpen)
 		onDropdownOpen()
 	}
-
-	console.log(comments)
 
 	return (
 		<div className='bg-white rounded-lg shadow-md p-4 my-4'>
@@ -45,18 +43,25 @@ export function Blog({ blog, onDropdownOpen }: BlogProps) {
 				Read more
 			</a>
 			<button
-				className='hover:bg-blue-200 text-gray-500 font-bold py-2 px-4 rounded'
+				className='transition hover:bg-blue-200 text-gray-500 font-bold py-2 px-4 rounded'
 				onClick={toggleDropdown}
 			>
 				Comment
 			</button>
-			{dropdownOpen && comments.length === 0 ? (
-				<>
-					<p className='text-gray-600'>No comments yet</p>
-					{role === 'commentator' && <CommentForm />}
-				</>
-			) : (
-				<CommentList />
+			{dropdownOpen && (
+				<div>
+					{comments.length === 0 ? (
+						<>
+						  <p className='text-gray-600'>No comments yet</p>
+						  <CommentForm />
+						</>
+					) : (
+						<>
+						  <CommentList />
+						  <CommentForm />
+						</>
+					)}
+				</div>
 			)}
 		</div>
 	)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	Button,
 	Container,
@@ -16,8 +16,8 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { notify } from '../../../shared/notifyError'
 import { notifySuccess } from '../../../shared/notifySuccess'
-import { getError } from '../auth.module'
-import { Fields } from '../login/Login.constants'
+import { getError } from '../auth.model'
+import { Fields } from '../auth.constants'
 import { useRole } from './context/Role.context'
 
 interface SignUpForm {
@@ -35,12 +35,15 @@ export function SignUp() {
 	} = useForm<SignUpForm>()
 
 	const navigate = useNavigate()
-
 	const { role, setRole } = useRole()
-
-	console.log(role)
+	const [roleState, setRoleState] = useState('')
 
 	const onSubmit = async (data: SignUpForm): Promise<void> => {
+		if(!roleState) {
+			notify('Please choose your role')
+			return
+		}
+
 		try {
 			const response = await supabase.auth.signUp({
 				email: data.email,
@@ -52,7 +55,7 @@ export function SignUp() {
 			} else {
 				notifySuccess('Check your email for confirmation')
 			}
-			navigate('/')
+			navigate('/confirm')
 		} catch (error: any) {
 			console.error('Sign up error:', error.message)
 		}
@@ -124,13 +127,19 @@ export function SignUp() {
 							value='commentator'
 							control={<Radio />}
 							label='Commentator'
-							onChange={() => setRole('commentator')}
+							onChange={() => {
+								setRole('commentator')
+								setRoleState('commentator')
+							}}
 						/>
 						<FormControlLabel
 							value='author'
 							control={<Radio />}
 							label='Author'
-							onChange={() => setRole('author')}
+							onChange={() => {
+								setRole('author')
+								setRoleState('author')
+							}}
 						/>
 					</RadioGroup>
 				</FormControl>

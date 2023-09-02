@@ -3,8 +3,8 @@ import { Login } from "./feature/auth/login/Login";
 import { SignUp } from "./feature/auth/sign-up/SignUp";
 import { Home } from "./pages/Home";
 import { NotFound } from "./shared/error/404";
-import { Loader } from "./shared/Loader";
 import { NavLayout } from "./feature/layout/NavLayout";
+import { EmailConfirm } from './feature/auth/sign-up/EmailConfirm'
 
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/confirm" element={<EmailConfirm />} />
       </Routes>
     </NavLayout>
   )
