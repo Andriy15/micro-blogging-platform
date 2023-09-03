@@ -25,7 +25,7 @@ export function AuthorsList() {
 			<h1 className='text-center text-stone-400 text-2xl'>Authors List</h1>
 			{emailSet.map((email: string) => (
 				<Link
-					to='/authors_blog'
+					to={`/authors/${email}`}
 					key={email}
 					className='bg-white rounded-lg shadow-md p-8 w-96 text-center mb-4'
 					onClick={() => setAuthorsEmail(email)}

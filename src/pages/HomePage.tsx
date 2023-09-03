@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useUser } from '../entities/user/user.hook'
 import { Button } from '../features/blog/createBlog/ui/Button'

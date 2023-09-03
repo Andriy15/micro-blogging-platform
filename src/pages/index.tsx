@@ -7,8 +7,11 @@ import { NotFound } from '../shared/error/404'
 import { EmailConfirmPage } from './EmailConfirmPage'
 import { AuthorsPage } from './AuthorsPage'
 import { AuthorsBlog } from '../features/authors/AuthorsBlog'
+import { useAuthorsEmail } from '../features/authors/context/AuthorsEmail.context'
 
 export function Router() {
+	const { authorsEmail } = useAuthorsEmail()
+
 	return (
 		<NavLayout>
 			<Routes>
@@ -18,7 +21,7 @@ export function Router() {
 				<Route path='/sign-up' element={<SignUp />} />
 				<Route path='*' element={<NotFound />} />
 				<Route path='/confirm' element={<EmailConfirmPage />} />
-				<Route path='/authors_blog' element={<AuthorsBlog />} />
+				<Route path={`authors/${authorsEmail}`} element={<AuthorsBlog />} />
 			</Routes>
 		</NavLayout>
 	)

@@ -10,17 +10,18 @@ export function useBlogs() {
 
 	async function getBlogs(): Promise<void> {
 		try {
-		const { data, error } = await supabase
-			.from('blogs')
-			.select('*')
+			setLoading(true)
+			const { data, error } = await supabase.from('blogs').select('*')
 
 			if (error) {
 				notify(error.message)
 			}
 
-			if(data) {
+			if (data) {
 				setBlogs(data)
 			}
+			setError(null)
+			setLoading(false)
 		} catch (errorMessage) {
 			const error = errorMessage as Error
 			notify(error.message)

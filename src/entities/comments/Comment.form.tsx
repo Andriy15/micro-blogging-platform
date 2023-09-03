@@ -5,11 +5,11 @@ import { notify } from '../../shared/notifyError'
 import { IBlog } from '../../features/blog/Blog.model'
 import { useUser } from '../user/user.hook'
 
-interface CommentForm {
+interface CommentFormProps {
 	id: IBlog['id']
 }
 
-export function CommentForm({ id }: CommentForm) {
+export function CommentForm({ id }: CommentFormProps) {
 	const [comment, setComment] = useState('')
 	const {
 		handleSubmit,
@@ -22,7 +22,7 @@ export function CommentForm({ id }: CommentForm) {
 
 	const onSubmit = async () => {
 		try {
-			const { data, error } = await supabase
+			const { error } = await supabase
 				.from('comments')
 				.insert({ text: comment, email: user?.email, blog_id: id })
 				.single()
