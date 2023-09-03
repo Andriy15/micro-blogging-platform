@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import { notify } from '../../../shared/notifyError'
 import { notifySuccess } from '../../../shared/notifySuccess'
 import { getError } from '../model/model'
-import { REGEX_PATTRERNS } from '../model/constants'
+import { REGEX_PATTERNS } from '../model/constants'
 import { Fields, FORM_LABELS } from '../model/constants'
 
 interface LoginForm {
@@ -46,7 +46,7 @@ export function Login() {
 				<TextField
 					{...register('email', {
 						required: true,
-						pattern: REGEX_PATTRERNS.SPECIAL_CHARACTER
+						pattern: REGEX_PATTERNS.SPECIAL_CHARACTER
 					})}
 					label={FORM_LABELS[Fields.email]}
 					fullWidth

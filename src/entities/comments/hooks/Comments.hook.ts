@@ -1,8 +1,10 @@
 import { IComment } from '../Comment.model'
 import { useEffect, useState } from 'react'
 import { supabase } from '../../../features/config/supabaseClient'
+import { IBlog } from '../../../features/blog/Blog.model'
+import { notify } from '../../../shared/notifyError'
 
-export function useComment(id: number) {
+export function useComment(id: IBlog['id']) {
 	const [comments, setComments] = useState<IComment[]>([])
 
 	async function getComments() {
@@ -12,7 +14,9 @@ export function useComment(id: number) {
 				.select('*')
 				.eq('blog_id', id)
 
-			if (error) throw error
+			if (error) {
+				notify(error.message)
+			}
 
 			if (data !== null) {
 				setComments(data)

@@ -5,6 +5,7 @@ import { Login } from '../features/auth/login/Login'
 import { SignUp } from '../features/auth/sign-up/SignUp'
 import { NotFound } from '../shared/error/404'
 import { EmailConfirmPage } from './EmailConfirmPage'
+import { AuthorsPage } from './AuthorsPage'
 
 
 export function Router() {
@@ -12,6 +13,7 @@ export function Router() {
 		<NavLayout>
 			<Routes>
 				<Route path="/" element={<HomePage />} />
+				<Route path="/authors" element={<AuthorsPage />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="*" element={<NotFound />} />

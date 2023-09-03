@@ -32,6 +32,20 @@ export function NavLayout({ children }: NavLayoutProps) {
 					<div className='text-sm lg:flex-grow'>
 						{user ? (
 							<>
+								<Link
+									to='/'
+									className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'
+								>
+									Blogs
+								</Link>
+
+								<Link
+									to='/authors'
+									className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'
+								>
+									Authors
+								</Link>
+
 								<div className='block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4'>
 									{user.email}
 								</div>

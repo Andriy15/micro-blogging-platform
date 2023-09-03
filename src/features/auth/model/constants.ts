@@ -10,7 +10,7 @@ export const FORM_LABELS: Record<Fields, string> = {
 	[Fields.confirmPassword]: 'Confirm password'
 }
 
-export const REGEX_PATTRERNS = {
+export const REGEX_PATTERNS = {
 	DIGITS: /^(?=.*[0-9])/,
 	LOWERCASE_LETTER: /[a-z]/,
 	UPPERCASE_LETTER: /[A-Z]/,
