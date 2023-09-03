@@ -1,9 +1,12 @@
 import { useBlogs } from '../blog/createBlog/hooks/getBlogs'
 import { Loader } from '../../shared/Loader'
 import { Error } from '../../shared/error/Error'
+import { Link } from 'react-router-dom'
+import { useAuthorsEmail } from './context/AuthorsEmail.context'
 
 export function AuthorsList() {
 	const { blogs, loading, error } = useBlogs()
+	const { setAuthorsEmail } = useAuthorsEmail()
 
 	if (loading) {
 		return <Loader />
@@ -19,14 +22,16 @@ export function AuthorsList() {
 
 		return (
 			<div className='container mx-auto flex flex-col items-center max-w-2xl pt-5'>
-				<h1 className='text-center text-stone-400 text-2xl'>Authots List</h1>
+				<h1 className='text-center text-stone-400 text-2xl'>Authors List</h1>
 				{set.map((email: string) => (
-					<div
+					<Link
+						to='/authors_blog'
 						key={email}
 						className='bg-white rounded-lg shadow-md p-8 w-96 text-center mb-4'
+						onClick={() => setAuthorsEmail(email)}
 					>
 						{email}
-					</div>
+					</Link>
 				))}
 			</div>
 		)

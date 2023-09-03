@@ -6,9 +6,11 @@ import { SignUp } from '../features/auth/sign-up/SignUp'
 import { NotFound } from '../shared/error/404'
 import { EmailConfirmPage } from './EmailConfirmPage'
 import { AuthorsPage } from './AuthorsPage'
+import { AuthorsBlog } from '../features/authors/AuthorsBlog'
 
 
 export function Router() {
+
 	return (
 		<NavLayout>
 			<Routes>
@@ -18,6 +20,7 @@ export function Router() {
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="*" element={<NotFound />} />
 				<Route path="/confirm" element={<EmailConfirmPage />} />
+				<Route path='/authors_blog' element={<AuthorsBlog />} />
 			</Routes>
 		</NavLayout>
 	)
