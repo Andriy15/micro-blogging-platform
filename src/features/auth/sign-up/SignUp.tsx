@@ -11,20 +11,15 @@ import {
 	Typography
 } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { supabase } from '../../config/supabaseClient'
+import { supabase } from '../../../supabaseClient'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { notify } from '../../../shared/notifyError'
 import { notifySuccess } from '../../../shared/notifySuccess'
-import { getError } from '../model/model'
-import { Fields } from '../model/constants'
+import { getError } from '../model'
+import { Fields, REGEX_PATTERNS } from '../constants'
 import { useRole } from './context/Role.context'
-
-interface SignUpForm {
-	email: string
-	password: string
-	confirmPassword: string
-}
+import { SignUpForm } from './SignUp.model'
 
 export function SignUp() {
 	const {
@@ -35,7 +30,7 @@ export function SignUp() {
 	} = useForm<SignUpForm>()
 
 	const navigate = useNavigate()
-	const { role, setRole } = useRole()
+	const { setRole } = useRole()
 	const [roleState, setRoleState] = useState('')
 
 	const onSubmit = async (data: SignUpForm): Promise<void> => {
@@ -72,7 +67,7 @@ export function SignUp() {
 					type='email'
 					{...register('email', {
 						required: true,
-						pattern: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
+						pattern: REGEX_PATTERNS[Fields.email]
 					})}
 					variant='outlined'
 					margin='normal'
@@ -85,7 +80,7 @@ export function SignUp() {
 				<TextField
 					id='password'
 					type='password'
-					{...register('password', { required: true, minLength: 8 })}
+					{...register('password', { required: true, minLength: 8, pattern: REGEX_PATTERNS[Fields.password] })}
 					variant='outlined'
 					margin='normal'
 					label='Password'

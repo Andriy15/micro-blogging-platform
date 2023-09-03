@@ -2,18 +2,15 @@ import React from 'react'
 import { Button, Container, Link, TextField, Typography } from '@mui/material'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { supabase } from '../../config/supabaseClient'
+import { supabase } from '../../../supabaseClient'
 import { ToastContainer } from 'react-toastify'
 import { notify } from '../../../shared/notifyError'
 import { notifySuccess } from '../../../shared/notifySuccess'
-import { getError } from '../model/model'
-import { REGEX_PATTERNS } from '../model/constants'
-import { Fields, FORM_LABELS } from '../model/constants'
+import { getError } from '../model'
+import { REGEX_PATTERNS } from '../constants'
+import { Fields, FORM_LABELS } from '../constants'
+import { LoginForm } from './Login.model'
 
-interface LoginForm {
-	email: string
-	password: string
-}
 
 export function Login() {
 	const {
@@ -46,7 +43,7 @@ export function Login() {
 				<TextField
 					{...register('email', {
 						required: true,
-						pattern: REGEX_PATTERNS.SPECIAL_CHARACTER
+						pattern: REGEX_PATTERNS[Fields.email]
 					})}
 					label={FORM_LABELS[Fields.email]}
 					fullWidth

@@ -11,9 +11,7 @@ export const FORM_LABELS: Record<Fields, string> = {
 }
 
 export const REGEX_PATTERNS = {
-	DIGITS: /^(?=.*[0-9])/,
-	LOWERCASE_LETTER: /[a-z]/,
-	UPPERCASE_LETTER: /[A-Z]/,
-	SPECIAL_CHARACTER: /[^A-Za-z0-9]/
+	[Fields.email]: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+	[Fields.password]: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
 }
 

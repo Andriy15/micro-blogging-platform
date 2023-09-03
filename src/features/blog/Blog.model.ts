@@ -8,3 +8,8 @@ export interface IBlog {
 	published_at: string
 	content: string
 }
+
+export interface BlogProps {
+	blog: IBlog
+	onDropdownOpen: () => void
+}

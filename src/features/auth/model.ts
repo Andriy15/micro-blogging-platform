@@ -17,6 +17,9 @@ export const getError = (field: Fields, errors: any) => {
         if (errors.password?.type === 'minLength') {
           return 'Min length is 8 symbols'
         }
+        if (errors.password?.type === 'pattern') {
+          return 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character'
+        }
         break
       case Fields.confirmPassword:
         if (errors.confirmPassword?.type === 'required') {

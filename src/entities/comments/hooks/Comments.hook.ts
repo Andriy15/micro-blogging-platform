@@ -1,6 +1,6 @@
 import { IComment } from '../Comment.model'
 import { useEffect, useState } from 'react'
-import { supabase } from '../../../features/config/supabaseClient'
+import { supabase } from '../../../supabaseClient'
 import { IBlog } from '../../../features/blog/Blog.model'
 import { notify } from '../../../shared/notifyError'
 

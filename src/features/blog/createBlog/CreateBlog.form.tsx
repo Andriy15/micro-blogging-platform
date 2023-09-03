@@ -1,11 +1,15 @@
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { supabase } from '../../config/supabaseClient'
+import { supabase } from '../../../supabaseClient'
 import { notify } from '../../../shared/notifyError'
 import { useUser } from '../../../entities/user/user.hook'
 
 export function CreateBlog() {
-	const { handleSubmit, register, formState: { errors } } = useForm()
+	const {
+		handleSubmit,
+		register,
+		formState: { errors }
+	} = useForm()
 	const [title, setTitle] = useState('')
 	const [content, setContent] = useState('')
 	const [description, setDescription] = useState('')
@@ -20,9 +24,17 @@ export function CreateBlog() {
 			return
 		}
 		try {
-			const { data, error } = await supabase
+			const { error } = await supabase
 				.from('blogs')
-				.insert({ title: title, content: content, email: user?.email, published_at: new Date(), description: description, urlimage: urlImage, url: url })
+				.insert({
+					title: title,
+					content: content,
+					email: user?.email,
+					published_at: new Date(),
+					description: description,
+					urlimage: urlImage,
+					url: url
+				})
 				.single()
 			if (error) {
 				notify(error.message)
@@ -40,7 +52,10 @@ export function CreateBlog() {
 	}
 
 	return (
-		<div className='bg-white rounded-lg shadow-md p-4 my-4' style={{ maxHeight: '600px', overflowY: 'auto' }}>
+		<div
+			className='bg-white rounded-lg shadow-md p-4 my-4'
+			style={{ maxHeight: '600px', overflowY: 'auto' }}
+		>
 			<form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
 				<label htmlFor='title' className='text-gray-700 font-medium mb-1'>
 					Title
@@ -103,9 +118,7 @@ export function CreateBlog() {
 					{...register('url', { required: true })}
 					onChange={e => setUrl(e.target.value)}
 				/>
-				{errors.url && (
-					<span className='text-red-400'>Please enter a url</span>
-				)}
+				{errors.url && <span className='text-red-400'>Please enter a url</span>}
 				<button
 					type='submit'
 					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'

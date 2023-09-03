@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { supabase } from '../../features/config/supabaseClient'
+import { supabase } from '../../supabaseClient'
 import { User } from '@supabase/supabase-js'
 import { notify } from '../../shared/notifyError'
 

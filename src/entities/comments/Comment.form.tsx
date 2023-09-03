@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { supabase } from '../../features/config/supabaseClient'
+import { supabase } from '../../supabaseClient'
 import { useForm } from 'react-hook-form'
 import { notify } from '../../shared/notifyError'
 import { IBlog } from '../../features/blog/Blog.model'

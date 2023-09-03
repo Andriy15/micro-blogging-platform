@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
-import { IBlog } from './Blog.model'
+import { BlogProps } from './Blog.model'
 import { CommentForm } from '../../entities/comments/Comment.form'
 import { CommentList } from '../../entities/comments/Comment.list'
 import { DateTime } from 'luxon'
 import { useRole } from '../auth/sign-up/context/Role.context'
 
-interface BlogProps {
-	blog: IBlog
-	onDropdownOpen: () => void
-}
 
 export function Blog({ blog, onDropdownOpen }: BlogProps) {
 	const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -21,7 +17,7 @@ export function Blog({ blog, onDropdownOpen }: BlogProps) {
 	}
 
 	return (
-		<div className='bg-white rounded-lg shadow-md p-4 my-4 w-[400px]'>
+		<div className='bg-white rounded-lg shadow-md p-4 my-4 w-[500px] '>
 			<p className='text-gray-400 mb-2'>Published at: {DateTime.fromISO(blog.published_at).toLocaleString(DateTime.DATE_MED)}</p>
 			<img
 				src={blog.urlimage}
