@@ -4,6 +4,7 @@ import { CommentForm } from '../../entities/comments/Comment.form'
 import { CommentList } from '../../entities/comments/Comment.list'
 import { DateTime } from 'luxon'
 import { useRole } from '../auth/sign-up/context/Role.context'
+import { Role } from '../auth/sign-up/context/Role.constants'
 
 
 export function Blog({ blog, onDropdownOpen }: BlogProps) {
@@ -44,7 +45,7 @@ export function Blog({ blog, onDropdownOpen }: BlogProps) {
 			{dropdownOpen && (
 				<div>
 					<CommentList id={blog.id} />
-					{role === 'commentator' && <CommentForm id={blog.id} />}
+					{role === Role.commentator && <CommentForm id={blog.id} />}
 				</div>
 			)}
 		</div>

@@ -3,6 +3,7 @@ import { useUser } from '../entities/user/user.hook'
 import { Button } from '../features/blog/createBlog/ui/Button'
 import { BlogList } from '../features/blog/Blog.list'
 import { useRole } from '../features/auth/sign-up/context/Role.context'
+import { Role } from '../features/auth/sign-up/context/Role.constants'
 
 export function HomePage() {
 	const { user } = useUser()
@@ -15,7 +16,7 @@ export function HomePage() {
 				<div className='container mx-auto flex flex-col items-center max-w-2xl pt-5'>
 					<BlogList />
 
-					{role === 'author' && (
+					{role === Role.author && (
 						<div className='fixed bottom-10 right-10'>
 							<Button>Create new Blog</Button>
 						</div>
