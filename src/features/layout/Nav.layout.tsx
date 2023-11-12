@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useUser } from '../../entities/user/user.hook'
-import { supabase } from '../../supabaseClient'
-import { notify } from '../../shared/notifyError'
+import { useUser } from 'entities/user/user.hook'
+import { supabase } from 'supabaseClient'
+import { notify } from 'shared/notifyError'
 import { useRole } from '../auth/sign-up/context/Role.context'
 import { NavLayoutProps } from './Nav.model'
 

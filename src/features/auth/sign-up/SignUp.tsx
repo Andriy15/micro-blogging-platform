@@ -139,7 +139,7 @@ export function SignUp() {
 					</RadioGroup>
 				</FormControl>
 
-				<Button type='submit' variant='text' color='primary' fullWidth>
+				<Button type='submit' variant='outlined' color='primary' fullWidth>
 					Sign Up
 				</Button>
 			</form>
